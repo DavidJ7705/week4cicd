@@ -1,8 +1,6 @@
 package ie.atu.week4cicd;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +18,12 @@ public class ProductController {
     @GetMapping("/getProducts")
     public List<Product> getProduct()
     {
+        return productList;
+    }
+
+    @PostMapping("/addProduct")
+    public List<Product> addProduct(@RequestBody Product product){
+        productList.add(product);
         return productList;
     }
 
