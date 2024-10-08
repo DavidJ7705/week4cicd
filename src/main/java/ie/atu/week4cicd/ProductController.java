@@ -1,5 +1,6 @@
 package ie.atu.week4cicd;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -22,9 +23,24 @@ public class ProductController {
     }
 
     @PostMapping("/addProduct")
-    public List<Product> addProduct(@RequestBody Product product){
+    public ResponseEntity<List> addProduct(@RequestBody Product product){
         productList.add(product);
-        return productList;
+        return ResponseEntity.ok(productList);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<List> updateProduct(@PathVariable String id,@RequestBody Product product)
+    {
+        for(Product p : productList) {
+            if (p.getId().equals(id)) {
+                productList.remove(p);
+            }
+        }
+        productList.add(product);
+        return ResponseEntity.ok(productList);
+    }
+
+
+
 
 }
